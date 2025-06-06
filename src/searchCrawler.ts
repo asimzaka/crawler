@@ -95,9 +95,10 @@ export async function searchPageHandler(context: PlaywrightCrawlingContext) {
     while (nextPageButton) {
 
         await nextPageButton.click();
+        await page.waitForTimeout(3000);
         await page.waitForLoadState('networkidle');
         await enqueueLinks({
-        selector: 'a.pwplist-item-link',
+            selector: 'a.pwplist-item-link',
             label: 'DETAIL',
         });
         nextPageButton = await page.$('a.ui-paginator-next.ui-paginator-element.ui-state-default.ui-corner-all:not(.ui-state-disabled)');
